@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "696084244532",
+    "project_id": "goldcasino-179b8",
+    "storage_bucket": "goldcasino-179b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696084244532:android:885cc9e4822692559d0261",
+        "android_client_info": {
+          "package_name": "com.example.goldencasino"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlma1uW0sbpM1SaEhUaNbgfUJLp1vWaA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

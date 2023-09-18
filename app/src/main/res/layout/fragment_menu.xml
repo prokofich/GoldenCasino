@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragments.MenuFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_menu_img"/>
+
+    <TextView
+        android:fontFamily="@font/cinzel_decorative"
+        android:id="@+id/id_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="#ffd700"
+        app:layout_constraintHeight_percent="0.1"
+        android:text="GoldCasino"
+        android:textStyle="bold"
+        android:textSize="55sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/id_menu_tv_title_cash"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="1000$"
+            android:background="@drawable/background_tv_price"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintEnd_toStartOf="@id/id_menu_iv_title_cash"
+            app:layout_constraintTop_toBottomOf="@id/id_tv_title"/>
+
+    <TextView
+        android:id="@+id/id_menu_tv_rules"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="rules"
+        android:background="@drawable/background_splash_tv"
+        android:textStyle="bold"
+        android:fontFamily="@font/crimson_text"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_tv_title"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHeight_percent="0.07"/>
+
+        <ImageView
+            android:id="@+id/id_menu_iv_title_cash"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_tv_title" />
+
+
+    <TextView
+        android:id="@+id/id_tv_game_easy"
+        android:gravity="center"
+        android:background="@drawable/background_splash_tv"
+        android:text="easy game"
+        android:layout_width="0dp"
+        android:fontFamily="@font/cinzel_decorative"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/id_button_start_easy"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.06"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/id_button_start_easy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="-start-"
+        android:textColor="#ffd700"
+        android:background="@drawable/background_button"
+        android:textStyle="bold"
+        android:textSize="37sp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/aleo_light"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintBottom_toTopOf="@id/id_button_start_middle"
+        app:layout_constraintTop_toBottomOf="@id/id_menu_tv_rules"/>
+
+    <TextView
+        android:id="@+id/id_tv_game_easy_price"
+        android:gravity="center"
+        android:background="@drawable/background_tv_price"
+        android:text="price: 100$"
+        android:layout_width="0dp"
+        android:fontFamily="@font/cinzel_decorative"
+        android:textStyle="bold|italic"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_button_start_easy"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.06"/>
+
+    <TextView
+        android:id="@+id/id_tv_game_middle"
+        android:gravity="center"
+        android:background="@drawable/background_splash_tv"
+        android:text="middle game"
+        android:layout_width="0dp"
+        android:fontFamily="@font/cinzel_decorative"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/id_button_start_middle"
+        app:layout_constraintWidth_percent="0.55"
+        app:layout_constraintHeight_percent="0.06"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/id_button_start_middle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="-start-"
+        android:textColor="#ffd700"
+        android:background="@drawable/background_button"
+        android:textStyle="bold"
+        android:textSize="37sp"
+        android:fontFamily="@font/aleo_light"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/id_button_start_hard"
+        app:layout_constraintTop_toBottomOf="@id/id_button_start_easy"/>
+
+    <TextView
+        android:id="@+id/id_tv_game_middle_price"
+        android:gravity="center"
+        android:text="price: 150$"
+        android:background="@drawable/background_tv_price"
+        android:layout_width="0dp"
+        android:fontFamily="@font/cinzel_decorative"
+        android:textStyle="bold|italic"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_button_start_middle"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.06"/>
+
+    <TextView
+        android:id="@+id/id_tv_game_hard"
+        android:gravity="center"
+        android:background="@drawable/background_splash_tv"
+        android:text="hard game"
+        android:layout_width="0dp"
+        android:fontFamily="@font/cinzel_decorative"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/id_button_start_hard"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.06"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/id_button_start_hard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="-start-"
+        android:textColor="#ffd700"
+        android:background="@drawable/background_button"
+        android:textStyle="bold"
+        android:textSize="37sp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/aleo_light"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/id_menu_button_exit"
+        app:layout_constraintTop_toBottomOf="@id/id_button_start_middle"/>
+
+    <TextView
+        android:id="@+id/id_tv_game_hard_price"
+        android:gravity="center"
+        android:text="price: 200$"
+        android:layout_width="0dp"
+        android:background="@drawable/background_tv_price"
+        android:fontFamily="@font/cinzel_decorative"
+        android:textStyle="bold|italic"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_button_start_hard"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.06"/>
+
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/id_menu_button_exit"
+        android:layout_width="0dp"
+        android:fontFamily="@font/aleo_light"
+        android:layout_height="0dp"
+        android:text="exit"
+        android:background="@drawable/background_button"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="33sp"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.SplashActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/id_splash_img"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:fontFamily="@font/cinzel_decorative"
+        android:id="@+id/id_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="#ffd700"
+        app:layout_constraintHeight_percent="0.2"
+        android:text="GoldCasino"
+        android:textStyle="bold"
+        android:textSize="55sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/background_splash_tv"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.13"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:fontFamily="@font/crimson_text"
+        android:text="Come by every day.Valuable prizes are waiting for you"
+        app:layout_constraintTop_toBottomOf="@id/id_tv_title" />
+
+    <ProgressBar
+        android:id="@+id/id_splash_progressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleY="2"
+        android:backgroundTint="#ffd700"
+        android:progressTint="#ffd700"
+        android:layout_marginBottom="50dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/id_splash_tv_progress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/background_splash_tv"
+        android:text="100%"
+        android:textSize="50sp"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintBottom_toTopOf="@id/id_splash_progressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

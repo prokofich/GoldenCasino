@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.FreeMoneyActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_img_free_money"/>
+    
+    <TextView
+        android:fontFamily="@font/crimson_text"
+        android:id="@+id/id_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/background_splash_tv"
+        android:textColor="@color/black"
+        android:text="We have a daily reward for you!"
+        android:textStyle="bold|italic"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintWidth_percent="0.9"/>
+    
+    <ImageView
+        android:visibility="visible"
+        android:id="@+id/id_free_money_img_case"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.43"/>
+    
+    <TextView
+        android:id="@+id/id_free_money_tv_comm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:background="@drawable/background_splash_tv"
+        android:textColor="@color/black"
+        android:text="click on the case to learn the prize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.95"
+        app:layout_constraintHeight_percent="0.06"
+        android:textStyle="italic"
+        android:textSize="25sp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/id_free_money_img_case"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/id_free_money_tv_cash"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/background_splash_tv"
+        android:textColor="@color/black"
+        android:text="200$"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold|italic"
+        android:textSize="55sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/id_free_money_iv_cash"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.1"/>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/id_free_money_iv_cash"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toEndOf="@id/id_free_money_tv_cash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/id_free_money_button_continue"
+        android:layout_width="0dp"
+        android:background="@drawable/background_button"
+        android:visibility="gone"
+        android:fontFamily="@font/aleo_light"
+        android:layout_height="0dp"
+        android:text="continue"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"/>
+    
+</androidx.constraintlayout.widget.ConstraintLayout>
