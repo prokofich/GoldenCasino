@@ -1,4 +1,4 @@
-package com.example.goldencasino.adapter
+package com.example.goldencasino.model.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,9 +11,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.goldencasino.R
-import com.example.goldencasino.constant.url_image_bomb
-import com.example.goldencasino.constant.url_image_gold
-import com.example.goldencasino.constant.url_image_znak_question
+import com.example.goldencasino.model.constant.url_image_bomb
+import com.example.goldencasino.model.constant.url_image_gold
+import com.example.goldencasino.model.constant.url_image_znak_question
 import com.example.goldencasino.view.fragments.FirstGameFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AdapterEasy(private val context: Context,private val intrfc:InterfaceGameOver): RecyclerView.Adapter<AdapterEasy.EasyViewHolder>() {
+class AdapterEasy(private val context: Context,private val intrfc: InterfaceGameOver): RecyclerView.Adapter<AdapterEasy.EasyViewHolder>() {
 
     private var listCash = emptyList<Int>()
     var myCash = 0
@@ -94,8 +94,6 @@ class AdapterEasy(private val context: Context,private val intrfc:InterfaceGameO
     }
 
     //функция всплывающего сообщения
-    private fun showToast(message:String){
-        Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
-    }
+    private fun showToast(message:String) = Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
 
 }

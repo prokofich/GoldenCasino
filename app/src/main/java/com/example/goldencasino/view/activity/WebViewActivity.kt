@@ -1,5 +1,6 @@
 package com.example.goldencasino.view.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -11,69 +12,63 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
-import com.example.goldencasino.R
 import com.example.goldencasino.databinding.ActivityWebViewBinding
 
 class WebViewActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityWebViewBinding
-
-    private lateinit var webView: WebView
+    private var binding: ActivityWebViewBinding? = null
+    private var webView: WebView? = null
     private var fileUploadCallback: ValueCallback<Array<Uri>>? = null
     private val FILE_CHOOSER_RESULT_CODE = 1
-    private val REQUEST_PERMISSIONS = 2
     private var customView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWebViewBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
 
-        webView = binding.idWebview
+        webView = binding?.idWebview
 
         setupWebView()
 
         if (savedInstanceState != null) {
-            webView.restoreState(savedInstanceState)
+            webView?.restoreState(savedInstanceState)
         } else {
-            webView.loadUrl(intent.getStringExtra("url")!!)
+            webView?.loadUrl(intent.getStringExtra("url")!!)
         }
 
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        webView.saveState(outState)
+        webView?.saveState(outState)
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView() {
-        val webSettings: WebSettings = webView.settings
-        webSettings.javaScriptEnabled = true
+        val webSettings: WebSettings? = webView?.settings
 
-        webSettings.domStorageEnabled = true
-        webSettings.cacheMode = WebSettings.LOAD_DEFAULT
-        webSettings.databaseEnabled = true
-        webSettings.databasePath = applicationContext.getDir("webview_databases", 0).path
+        webSettings?.javaScriptEnabled = true
+        webSettings?.domStorageEnabled = true
+        webSettings?.cacheMode = WebSettings.LOAD_DEFAULT
+        webSettings?.databaseEnabled = true
+        webSettings?.databasePath = applicationContext.getDir("webview_databases", 0).path
+        webSettings?.allowFileAccess = true
+        webSettings?.mediaPlaybackRequiresUserGesture = false
+        webSettings?.loadsImagesAutomatically = true
+        webSettings?.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 
-        webSettings.allowFileAccess = true
-
-        webView.settings.mediaPlaybackRequiresUserGesture = false
-        webView.settings.loadsImagesAutomatically = true
-        webView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-
-
-
-        webView.webViewClient = object : WebViewClient() {
+        webView?.webViewClient = object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
                 return true
             }
 
-
         }
 
-        webView.webChromeClient = object : WebChromeClient() {
+        webView?.webChromeClient = object : WebChromeClient() {
             override fun onShowFileChooser(
                 webView: WebView,
                 filePathCallback: ValueCallback<Array<Uri>>,
@@ -88,6 +83,7 @@ class WebViewActivity : AppCompatActivity() {
 
                 val intent = fileChooserParams.createIntent()
                 try {
+                    @Suppress("DEPRECATION")
                     startActivityForResult(intent, FILE_CHOOSER_RESULT_CODE)
                 } catch (e: Exception) {
                     fileUploadCallback = null
@@ -110,7 +106,7 @@ class WebViewActivity : AppCompatActivity() {
                     decorView.addView(it, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
                 }
 
-                webView.visibility = View.GONE
+                webView?.visibility = View.GONE
             }
 
             override fun onHideCustomView() {
@@ -122,12 +118,13 @@ class WebViewActivity : AppCompatActivity() {
                     customView = null
                 }
 
-                webView.visibility = View.VISIBLE
+                webView?.visibility = View.VISIBLE
             }
 
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -140,9 +137,10 @@ class WebViewActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
+        if (webView?.canGoBack() == true) {
+            webView?.goBack()
         } else {
             finishAffinity()
         }

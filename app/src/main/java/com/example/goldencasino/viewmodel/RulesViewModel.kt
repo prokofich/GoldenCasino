@@ -3,7 +3,7 @@ package com.example.goldencasino.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.goldencasino.api.Repository
+import com.example.goldencasino.model.api.Repository
 import com.example.goldencasino.model.ResponseText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,14 +12,14 @@ import retrofit2.Response
 
 class RulesViewModel:ViewModel(){
 
-    val repo = Repository()
-    val Text: MutableLiveData<Response<ResponseText>> = MutableLiveData()
+    private val repository = Repository()
+    val text: MutableLiveData <Response <ResponseText> > = MutableLiveData()
 
     fun getTextRules(){
         viewModelScope.launch(Dispatchers.IO) {
-            val responce = repo.getTextRules()
+            val responce = repository.getTextRules()
             withContext(Dispatchers.Main){
-                Text.value = responce
+                text.value = responce
             }
         }
     }

@@ -8,7 +8,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
-        android:name=".OneSignallApplication"
+        android:name=".model.application.OneSignallApplication"
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

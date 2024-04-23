@@ -1,7 +1,6 @@
 package com.example.goldencasino.view.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,23 +10,20 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.goldencasino.R
-import com.example.goldencasino.constant.APP_PREFERENCES
-import com.example.goldencasino.constant.COMPLEXITY
-import com.example.goldencasino.constant.COMPLEXITY_EASY
-import com.example.goldencasino.constant.COMPLEXITY_HARD
-import com.example.goldencasino.constant.COMPLEXITY_MIDDLE
-import com.example.goldencasino.constant.MAIN
-import com.example.goldencasino.constant.MY_CASH
-import com.example.goldencasino.constant.url_image_cash
-import com.example.goldencasino.constant.url_image_menu_fragment
+import com.example.goldencasino.model.constant.COMPLEXITY
+import com.example.goldencasino.model.constant.COMPLEXITY_EASY
+import com.example.goldencasino.model.constant.COMPLEXITY_HARD
+import com.example.goldencasino.model.constant.COMPLEXITY_MIDDLE
+import com.example.goldencasino.model.constant.MAIN
+import com.example.goldencasino.model.constant.url_image_cash
+import com.example.goldencasino.model.constant.url_image_menu_fragment
 import com.example.goldencasino.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
 
-    private var binding:FragmentMenuBinding? = null
+    private var binding : FragmentMenuBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +38,7 @@ class MenuFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //показ количества денег
-        binding!!.idMenuTvTitleCash.text = "${MAIN.getMyCash()}$"
+        binding?.idMenuTvTitleCash?.text = "${MAIN.getMyCash()}$"
     }
 
     @SuppressLint("SetTextI18n")
@@ -50,16 +46,16 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //загрузка картинок с сервера
-        loadImage(url_image_menu_fragment,binding!!.idMenuImg)
-        loadImage(url_image_cash,binding!!.idMenuIvTitleCash)
+        loadImage(url_image_menu_fragment,binding?.idMenuImg)
+        loadImage(url_image_cash,binding?.idMenuIvTitleCash)
 
         //переход к показу правил игры
-        binding!!.idMenuTvRules.setOnClickListener {
-            MAIN.navController.navigate(R.id.action_menuFragment_to_rulesFragment)
+        binding?.idMenuTvRules?.setOnClickListener {
+            MAIN.navController?.navigate(R.id.action_menuFragment_to_rulesFragment)
         }
 
         //выход из игры
-        binding!!.idMenuButtonExit.setOnClickListener {
+        binding?.idMenuButtonExit?.setOnClickListener {
             showExitDialog()
         }
 
@@ -69,17 +65,17 @@ class MenuFragment : Fragment() {
         }
 
         //переход к простому уровню
-        binding!!.idButtonStartEasy.setOnClickListener {
+        binding?.idButtonStartEasy?.setOnClickListener {
             goToGameFragment(100)
         }
 
         //переход к среднему уровню
-        binding!!.idButtonStartMiddle.setOnClickListener {
+        binding?.idButtonStartMiddle?.setOnClickListener {
             goToGameFragment(150)
         }
 
         //переход к сложному уровню
-        binding!!.idButtonStartHard.setOnClickListener {
+        binding?.idButtonStartHard?.setOnClickListener {
             goToGameFragment(200)
         }
 
@@ -92,11 +88,13 @@ class MenuFragment : Fragment() {
     }
 
     //функция загрузки изображения
-    private fun loadImage(url:String,id: ImageView){
-        Glide.with(this)
-            .load(url)
-            .centerCrop()
-            .into(id)
+    private fun loadImage(url:String,id: ImageView?){
+        id?.let {
+            Glide.with(this)
+                .load(url)
+                .centerCrop()
+                .into(it)
+        }
     }
 
     //функция показа диалогового сообщения
@@ -120,9 +118,7 @@ class MenuFragment : Fragment() {
     }
 
     //функция всплывающего сообщения
-    private fun showToast(message:String){
-        Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
-    }
+    private fun showToast(message:String) = Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
 
     //переход к игре с проверкой на наличие средств
     private fun goToGameFragment(price:Int){
@@ -132,7 +128,7 @@ class MenuFragment : Fragment() {
                     MAIN.minusMyCash(100)
                     val bundle = Bundle()
                     bundle.putString(COMPLEXITY, COMPLEXITY_EASY)
-                    MAIN.navController.navigate(R.id.action_menuFragment_to_firstGameFragment,bundle)
+                    MAIN.navController?.navigate(R.id.action_menuFragment_to_firstGameFragment,bundle)
                 }else{
                     showToast("you don't have enough funds")
                 }
@@ -142,7 +138,7 @@ class MenuFragment : Fragment() {
                     MAIN.minusMyCash(150)
                     val bundle = Bundle()
                     bundle.putString(COMPLEXITY, COMPLEXITY_MIDDLE)
-                    MAIN.navController.navigate(R.id.action_menuFragment_to_firstGameFragment,bundle)
+                    MAIN.navController?.navigate(R.id.action_menuFragment_to_firstGameFragment,bundle)
                 }else{
                     showToast("you don't have enough funds")
                 }
@@ -152,7 +148,7 @@ class MenuFragment : Fragment() {
                     MAIN.minusMyCash(200)
                     val bundle = Bundle()
                     bundle.putString(COMPLEXITY, COMPLEXITY_HARD)
-                    MAIN.navController.navigate(R.id.action_menuFragment_to_firstGameFragment,bundle)
+                    MAIN.navController?.navigate(R.id.action_menuFragment_to_firstGameFragment,bundle)
                 }else{
                     showToast("you don't have enough funds")
                 }

@@ -1,4 +1,4 @@
-package com.example.goldencasino.adapter
+package com.example.goldencasino.model.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,41 +11,41 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.goldencasino.R
-import com.example.goldencasino.constant.url_image_bomb
-import com.example.goldencasino.constant.url_image_gold
-import com.example.goldencasino.constant.url_image_znak_question
+import com.example.goldencasino.model.constant.url_image_bomb
+import com.example.goldencasino.model.constant.url_image_gold
+import com.example.goldencasino.model.constant.url_image_znak_question
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AdapterMiddle(private val context: Context,private val intrfc:InterfaceGameOver): RecyclerView.Adapter<AdapterMiddle.MiddleViewHolder>() {
+class AdapterHard(private val context: Context,private val intrfc: InterfaceGameOver):RecyclerView.Adapter<AdapterHard.HardViewHolder>(){
 
     private var listCash = emptyList<Int>()
     var myCash = 0
     var job:Job = Job()
 
-    class MiddleViewHolder(view: View):RecyclerView.ViewHolder(view)
+    class HardViewHolder(view:View):RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiddleViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_middle,parent,false)
-        return MiddleViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HardViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_hard,parent,false)
+        return HardViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MiddleViewHolder, position: Int) {
-        val idImage = holder.itemView.findViewById<ImageView>(R.id.id_item_rv_middle_img)
+    override fun onBindViewHolder(holder: HardViewHolder, position: Int) {
+        val idImage = holder.itemView.findViewById<ImageView>(R.id.id_item_rv_hard_img)
         Glide.with(context)
             .load(url_image_znak_question)
             .centerCrop()
             .into(idImage)
     }
 
-    override fun onViewAttachedToWindow(holder: MiddleViewHolder) {
+    override fun onViewAttachedToWindow(holder: HardViewHolder) {
         super.onViewAttachedToWindow(holder)
 
-        val idImage = holder.itemView.findViewById<ImageView>(R.id.id_item_rv_middle_img)
-        val idText = holder.itemView.findViewById<TextView>(R.id.id_item_tv_middle)
+        val idImage = holder.itemView.findViewById<ImageView>(R.id.id_item_rv_hard_img)
+        val idText = holder.itemView.findViewById<TextView>(R.id.id_item_tv_hard)
         //обработка нажатия на изображение
         holder.itemView.setOnClickListener {
             if(listCash[holder.adapterPosition]!=0){
@@ -91,8 +91,6 @@ class AdapterMiddle(private val context: Context,private val intrfc:InterfaceGam
     }
 
     //функция всплывающего сообщения
-    private fun showToast(message:String){
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show()
-    }
+    private fun showToast(message:String) = Toast.makeText(context,message, Toast.LENGTH_SHORT).show()
 
 }

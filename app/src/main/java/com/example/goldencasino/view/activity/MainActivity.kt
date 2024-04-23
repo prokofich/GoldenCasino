@@ -3,17 +3,16 @@ package com.example.goldencasino.view.activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.goldencasino.R
-import com.example.goldencasino.constant.APP_PREFERENCES
-import com.example.goldencasino.constant.MAIN
-import com.example.goldencasino.constant.MY_CASH
+import com.example.goldencasino.model.constant.APP_PREFERENCES
+import com.example.goldencasino.model.constant.MAIN
+import com.example.goldencasino.model.constant.MY_CASH
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var navController: NavController
+    var navController : NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,12 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         MAIN = this
         navController = Navigation.findNavController(this,R.id.id_nav_host)
-
-        //установка полноэкранного режима
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
 
     }
 
@@ -37,23 +30,12 @@ class MainActivity : AppCompatActivity() {
 
     //функция обновления денежного счета
     fun addMyCash(cash:Int){
-        val pref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        pref.edit()
-            .putInt(MY_CASH,getMyCash()+cash)
-            .apply()
+        getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE).edit().putInt(MY_CASH,getMyCash()+cash).apply()
     }
 
     //функция обновления денежного счета
     fun minusMyCash(cash:Int){
-        val pref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        pref.edit()
-            .putInt(MY_CASH,getMyCash()-cash)
-            .apply()
+        getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE).edit().putInt(MY_CASH,getMyCash()-cash).apply()
     }
-
-
-
-
-
 
 }

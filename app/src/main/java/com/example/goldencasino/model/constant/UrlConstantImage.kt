@@ -1,4 +1,4 @@
-package com.example.goldencasino.constant
+package com.example.goldencasino.model.constant
 
 //SplashActivity
 const val url_image_splash = "http://37.27.9.28/20/splash.jpeg"

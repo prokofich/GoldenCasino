@@ -4,25 +4,21 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowManager
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.goldencasino.R
-import com.example.goldencasino.constant.APP_PREFERENCES
-import com.example.goldencasino.constant.ID
-import com.example.goldencasino.constant.LAST_DAY
-import com.example.goldencasino.constant.url_image_splash
+import com.example.goldencasino.model.constant.APP_PREFERENCES
+import com.example.goldencasino.model.constant.ID
+import com.example.goldencasino.model.constant.LAST_DAY
+import com.example.goldencasino.model.constant.url_image_splash
 import com.example.goldencasino.databinding.ActivitySplashBinding
 import com.example.goldencasino.viewmodel.SplashViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
@@ -32,33 +28,27 @@ import java.util.UUID
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySplashBinding
-    private var jobProgress:Job = Job()
-    private var jobPercent:Job = Job()
+    private var binding : ActivitySplashBinding? = null
+    private var jobProgress : Job = Job()
+    private var jobPercent : Job = Job()
     private var percent = 25
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
 
         //загрузка картинки с сервера
-        loadImage(url_image_splash,binding.idSplashImg)
-
-        //устновка полноэкранного режима
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        loadImage(url_image_splash,binding?.idSplashImg)
 
         val splashViewModel = ViewModelProvider(this)[SplashViewModel::class.java]
-        var namePhone = Build.MODEL.toString()
-        var locale = Locale.getDefault().getDisplayLanguage().toString()
+        val namePhone = Build.MODEL.toString()
+        val locale = Locale.getDefault().displayLanguage.toString()
         var id = ""
 
-        if (getMyId()!=""){
+        if (getMyId().isNotEmpty()){
             id = getMyId()
         }else{
             id = UUID.randomUUID().toString()
@@ -75,18 +65,18 @@ class SplashActivity : AppCompatActivity() {
             }
         }
 
-        binding.idSplashProgressBar.max = 2000
+        binding?.idSplashProgressBar?.max = 2000
         val finishProgress = 2000
 
         //показ анимации загрузки
-        ObjectAnimator.ofInt(binding.idSplashProgressBar,"progress",finishProgress)
+        ObjectAnimator.ofInt(binding?.idSplashProgressBar,"progress",finishProgress)
             .setDuration(4000)
             .start()
 
         //показ процентов загрузки
         jobPercent = CoroutineScope(Dispatchers.Main).launch{
             while(percent!=125){
-                binding.idSplashTvProgress.text = "$percent%"
+                binding?.idSplashTvProgress?.text = "$percent%"
                 delay(1000)
                 percent+=25
             }
@@ -95,6 +85,7 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
         if(jobPercent.isActive){
@@ -107,17 +98,18 @@ class SplashActivity : AppCompatActivity() {
     }
 
     //функция загрузки изображения
-    private fun loadImage(url:String,id:ImageView){
-        Glide.with(this)
-            .load(url)
-            .centerCrop()
-            .into(id)
+    private fun loadImage(url:String,id:ImageView?){
+        id?.let {
+            Glide.with(this)
+                .load(url)
+                .centerCrop()
+                .into(it)
+        }
     }
 
     //функция получения последнего дня,когда был получен денежный приз
-    private fun getLastDay():String{
-        val preferences = getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE).getString(LAST_DAY,"")
-        return preferences ?: ""
+    private fun getLastDay() : String{
+        return getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE).getString(LAST_DAY,"").toString()
     }
 
     //проверка на переход к получению денежного приза
@@ -129,41 +121,35 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    fun getMyId():String{
-        var preferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE).getString(ID,"")
-        return preferences ?: ""
+    private fun getMyId() : String{
+        return getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE).getString(ID,"").toString()
     }
 
-    fun setMyId(id:String){
-        var preferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        preferences.edit()
-            .putString(ID,id)
-            .apply()
+    private fun setMyId(id : String){
+        getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE).edit().putString(ID,id).apply()
     }
 
-    fun goToMainPush() {
+    private fun goToMainPush() {
         CoroutineScope(Dispatchers.Main).launch {
             delay(4000)
             checkLastDay()
         }
     }
 
-    fun goToMainNoPush() {
+    private fun goToMainNoPush() {
         CoroutineScope(Dispatchers.Main).launch {
             delay(4000)
             checkLastDay()
         }
     }
 
-    fun goToWeb(url:String) {
+    private fun goToWeb(url : String) {
         CoroutineScope(Dispatchers.Main).launch {
             delay(4000)
-            var intent = Intent(this@SplashActivity,WebViewActivity::class.java)
+            val intent = Intent(this@SplashActivity,WebViewActivity::class.java)
             intent.putExtra("url",url)
             startActivity(intent)
         }
     }
-
-
 
 }

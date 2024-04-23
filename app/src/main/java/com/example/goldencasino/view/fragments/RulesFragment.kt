@@ -10,14 +10,14 @@ import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.goldencasino.R
-import com.example.goldencasino.constant.MAIN
-import com.example.goldencasino.constant.url_image_fragment_rules
+import com.example.goldencasino.model.constant.MAIN
+import com.example.goldencasino.model.constant.url_image_fragment_rules
 import com.example.goldencasino.databinding.FragmentRulesBinding
 import com.example.goldencasino.viewmodel.RulesViewModel
 
 class RulesFragment : Fragment() {
 
-    private var binding: FragmentRulesBinding? = null
+    private var binding : FragmentRulesBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,22 +31,24 @@ class RulesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //загрузка фоновой картинки
-        loadImage(url_image_fragment_rules,binding!!.idIvRules)
+        loadImage(url_image_fragment_rules,binding?.idIvRules)
 
         //выход обратно в меню
-        binding!!.idButtonBack.setOnClickListener {
-            MAIN.navController.navigate(R.id.action_rulesFragment_to_menuFragment)
+        binding?.idButtonBack?.setOnClickListener {
+            MAIN.navController?.navigate(R.id.action_rulesFragment_to_menuFragment)
         }
 
         val rulesViewModel = ViewModelProvider(this)[RulesViewModel::class.java]
+
         rulesViewModel.getTextRules()
-        rulesViewModel.Text.observe(viewLifecycleOwner){ TEXT ->
-            binding!!.idTvRules.text = TEXT.body()!!.text
+
+        rulesViewModel.text.observe(viewLifecycleOwner){
+            binding!!.idTvRules.text = it.body()!!.text
         }
 
         //выход из игры
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            MAIN.navController.navigate(R.id.action_rulesFragment_to_menuFragment)
+            MAIN.navController?.navigate(R.id.action_rulesFragment_to_menuFragment)
         }
 
     }
@@ -58,11 +60,13 @@ class RulesFragment : Fragment() {
     }
 
     //функция загрузки изображения
-    private fun loadImage(url:String,id: ImageView){
-        Glide.with(this)
-            .load(url)
-            .centerCrop()
-            .into(id)
+    private fun loadImage(url:String,id: ImageView?){
+        id?.let {
+            Glide.with(this)
+                .load(url)
+                .centerCrop()
+                .into(it)
+        }
     }
 
 }

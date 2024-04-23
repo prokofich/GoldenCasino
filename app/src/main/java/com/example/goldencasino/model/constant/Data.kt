@@ -1,4 +1,4 @@
-package com.example.goldencasino.constant
+package com.example.goldencasino.model.constant
 //8-12
 val listCashEasy = listOf(50,50,50,50,50,50,50,0,0,0,0,0)
 

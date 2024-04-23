@@ -14,31 +14,30 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.goldencasino.R
-import com.example.goldencasino.adapter.AdapterEasy
-import com.example.goldencasino.adapter.AdapterHard
-import com.example.goldencasino.adapter.AdapterMiddle
-import com.example.goldencasino.adapter.InterfaceGameOver
-import com.example.goldencasino.constant.COMPLEXITY
-import com.example.goldencasino.constant.COMPLEXITY_EASY
-import com.example.goldencasino.constant.COMPLEXITY_HARD
-import com.example.goldencasino.constant.COMPLEXITY_MIDDLE
-import com.example.goldencasino.constant.MAIN
-import com.example.goldencasino.constant.listCashEasy
-import com.example.goldencasino.constant.listCashHard
-import com.example.goldencasino.constant.listCashMiddle
-import com.example.goldencasino.constant.url_image_cash
-import com.example.goldencasino.constant.url_image_menu_fragment
+import com.example.goldencasino.model.adapter.AdapterEasy
+import com.example.goldencasino.model.adapter.AdapterHard
+import com.example.goldencasino.model.adapter.AdapterMiddle
+import com.example.goldencasino.model.adapter.InterfaceGameOver
+import com.example.goldencasino.model.constant.COMPLEXITY
+import com.example.goldencasino.model.constant.COMPLEXITY_EASY
+import com.example.goldencasino.model.constant.COMPLEXITY_HARD
+import com.example.goldencasino.model.constant.COMPLEXITY_MIDDLE
+import com.example.goldencasino.model.constant.MAIN
+import com.example.goldencasino.model.constant.listCashEasy
+import com.example.goldencasino.model.constant.listCashHard
+import com.example.goldencasino.model.constant.listCashMiddle
+import com.example.goldencasino.model.constant.url_image_cash
+import com.example.goldencasino.model.constant.url_image_menu_fragment
 import com.example.goldencasino.databinding.FragmentFirstGameBinding
 import com.example.goldencasino.databinding.FragmentMenuBinding
 
-class FirstGameFragment : Fragment(),InterfaceGameOver {
+class FirstGameFragment : Fragment(), InterfaceGameOver {
 
-    private var binding:FragmentFirstGameBinding? = null
-    private lateinit var recyclerView:RecyclerView
-    private lateinit var adapterEasy: AdapterEasy
-    private lateinit var adapterMiddle: AdapterMiddle
-    private lateinit var adapterHard: AdapterHard
-
+    private var binding : FragmentFirstGameBinding? = null
+    private var recyclerView : RecyclerView? = null
+    private var adapterEasy : AdapterEasy? = null
+    private var adapterMiddle : AdapterMiddle? = null
+    private var adapterHard : AdapterHard? = null
     private var listCashForAdapter = listOf<Int>()
 
     override fun onCreateView(
@@ -53,80 +52,68 @@ class FirstGameFragment : Fragment(),InterfaceGameOver {
         super.onViewCreated(view, savedInstanceState)
 
         //загрузка фоновой картинки
-        loadImage(url_image_menu_fragment,binding!!.idGameImg)
+        loadImage(url_image_menu_fragment,binding?.idGameImg)
 
         //загрузка картинки денег
-        loadImage(url_image_cash,binding!!.idGameIvCashWin)
+        loadImage(url_image_cash,binding?.idGameIvCashWin)
 
-        recyclerView = binding!!.idGameRv
+        recyclerView = binding?.idGameRv
 
         when(requireArguments().getString(COMPLEXITY)){
             COMPLEXITY_EASY -> {
                 adapterEasy = AdapterEasy(requireContext(),this)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
-                recyclerView.adapter = adapterEasy
+                recyclerView?.layoutManager = GridLayoutManager(requireContext(),3)
+                recyclerView?.adapter = adapterEasy
                 listCashForAdapter = listCashEasy.shuffled()
-                adapterEasy.setList(listCashForAdapter)
+                adapterEasy?.setList(listCashForAdapter)
 
             }
             COMPLEXITY_MIDDLE -> {
                 adapterMiddle = AdapterMiddle(requireContext(),this)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(),4)
-                recyclerView.adapter = adapterMiddle
+                recyclerView?.layoutManager = GridLayoutManager(requireContext(),4)
+                recyclerView?.adapter = adapterMiddle
                 listCashForAdapter = listCashMiddle.shuffled()
-                adapterMiddle.setList(listCashForAdapter)
+                adapterMiddle?.setList(listCashForAdapter)
 
             }
             COMPLEXITY_HARD -> {
                 adapterHard = AdapterHard(requireContext(),this)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(),5)
-                recyclerView.adapter = adapterHard
+                recyclerView?.layoutManager = GridLayoutManager(requireContext(),5)
+                recyclerView?.adapter = adapterHard
                 listCashForAdapter = listCashHard.shuffled()
-                adapterHard.setList(listCashForAdapter)
+                adapterHard?.setList(listCashForAdapter)
             }
         }
 
         //выход в меню из игры
-        binding!!.idGameCsFinishButtonMenu.setOnClickListener {
-            MAIN.navController.navigate(R.id.action_firstGameFragment_to_menuFragment)
+        binding?.idGameCsFinishButtonMenu?.setOnClickListener {
+            MAIN.navController?.navigate(R.id.action_firstGameFragment_to_menuFragment)
         }
 
         //выход в меню из игры
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
             when(requireArguments().getString(COMPLEXITY)){
-                COMPLEXITY_EASY -> {
-                    adapterEasy.job.cancel()
-                }
-                COMPLEXITY_MIDDLE -> {
-                    adapterMiddle.job.cancel()
-                }
-                COMPLEXITY_HARD -> {
-                    adapterHard.job.cancel()
-                }
+                COMPLEXITY_EASY   -> { adapterEasy?.job?.cancel()   }
+                COMPLEXITY_MIDDLE -> { adapterMiddle?.job?.cancel() }
+                COMPLEXITY_HARD   -> { adapterHard?.job?.cancel()   }
             }
-            MAIN.navController.navigate(R.id.action_firstGameFragment_to_menuFragment)
+            MAIN.navController?.navigate(R.id.action_firstGameFragment_to_menuFragment)
         }
 
         //закончить и забрать деньги
         binding!!.idGameButtonFinish.setOnClickListener {
             when(requireArguments().getString(COMPLEXITY)){
                 COMPLEXITY_EASY -> {
-                    if(adapterEasy.job.isActive){
-                        adapterEasy.job.cancel()
-                    }
-                    gameOver(adapterEasy.myCash)
+                    if(adapterEasy?.job?.isActive == true) adapterEasy?.job?.cancel()
+                    gameOver(adapterEasy?.myCash)
                 }
                 COMPLEXITY_MIDDLE -> {
-                    if(adapterMiddle.job.isActive){
-                        adapterMiddle.job.cancel()
-                    }
-                    gameOver(adapterMiddle.myCash)
+                    if(adapterMiddle?.job?.isActive == true) adapterMiddle?.job?.cancel()
+                    gameOver(adapterMiddle?.myCash)
                 }
                 COMPLEXITY_HARD -> {
-                    if(adapterHard.job.isActive){
-                        adapterHard.job.cancel()
-                    }
-                    gameOver(adapterHard.myCash)
+                    if(adapterHard?.job?.isActive == true) adapterHard?.job?.cancel()
+                    gameOver(adapterHard?.myCash)
                 }
             }
         }
@@ -137,53 +124,54 @@ class FirstGameFragment : Fragment(),InterfaceGameOver {
                 COMPLEXITY_EASY -> {
                     if(MAIN.getMyCash() >= 100){
                         listCashForAdapter = listCashEasy.shuffled()
-                        adapterEasy.setList(listCashForAdapter)
-                        adapterEasy.myCash = 0
+                        adapterEasy?.setList(listCashForAdapter)
+                        adapterEasy?.myCash = 0
                         MAIN.minusMyCash(100)
                     }else{
-                        MAIN.navController.navigate(R.id.action_firstGameFragment_to_menuFragment)
+                        MAIN.navController?.navigate(R.id.action_firstGameFragment_to_menuFragment)
                         showToast("you don't have enough funds")
                     }
                 }
                 COMPLEXITY_MIDDLE -> {
                     if(MAIN.getMyCash() >= 150){
                         listCashForAdapter = listCashMiddle.shuffled()
-                        adapterMiddle.setList(listCashForAdapter)
-                        adapterMiddle.myCash = 0
+                        adapterMiddle?.setList(listCashForAdapter)
+                        adapterMiddle?.myCash = 0
                         MAIN.minusMyCash(150)
                     }else{
-                        MAIN.navController.navigate(R.id.action_firstGameFragment_to_menuFragment)
+                        MAIN.navController?.navigate(R.id.action_firstGameFragment_to_menuFragment)
                         showToast("you don't have enough funds")
                     }
                 }
                 COMPLEXITY_HARD -> {
                     if(MAIN.getMyCash() >= 0){
                         listCashForAdapter = listCashHard.shuffled()
-                        adapterHard.setList(listCashForAdapter)
-                        adapterHard.myCash = 0
+                        adapterHard?.setList(listCashForAdapter)
+                        adapterHard?.myCash = 0
                         MAIN.minusMyCash(200)
                     }else{
-                        MAIN.navController.navigate(R.id.action_firstGameFragment_to_menuFragment)
+                        MAIN.navController?.navigate(R.id.action_firstGameFragment_to_menuFragment)
                         showToast("you don't have enough funds")
                     }
                 }
             }
-            binding!!.idGameRv.isVisible = true
-            binding!!.idGameButtonFinish.isVisible = true
-            binding!!.idGameTvCashWin.isVisible = true
-            binding!!.idGameIvCashWin.isVisible = true
-
-            binding!!.idGameCsFinish.isVisible = false
+            binding?.idGameRv?.isVisible = true
+            binding?.idGameButtonFinish?.isVisible = true
+            binding?.idGameTvCashWin?.isVisible = true
+            binding?.idGameIvCashWin?.isVisible = true
+            binding?.idGameCsFinish?.isVisible = false
         }
 
     }
 
     //функция загрузки изображения
-    private fun loadImage(url:String,id: ImageView){
-        Glide.with(this)
-            .load(url)
-            .centerCrop()
-            .into(id)
+    private fun loadImage(url : String , id : ImageView?){
+        id?.let {
+            Glide.with(this)
+                .load(url)
+                .centerCrop()
+                .into(it)
+        }
     }
 
     //очистка биндинга при удалении вью
@@ -194,27 +182,25 @@ class FirstGameFragment : Fragment(),InterfaceGameOver {
 
     //функция окончания игры
     @SuppressLint("SetTextI18n")
-    override fun gameOver(cashWin: Int) {
-        MAIN.addMyCash(cashWin)
-        binding!!.idGameRv.isVisible = false
-        binding!!.idGameButtonFinish.isVisible = false
-        binding!!.idGameTvCashWin.isVisible = false
-        binding!!.idGameIvCashWin.isVisible = false
-
-        binding!!.idGameCsFinish.isVisible = true
-        binding!!.idGameCsFinishTvCash.text = "$cashWin$"
+    override fun gameOver(cashWin : Int?) {
+        cashWin?.let {
+            MAIN.addMyCash(it)
+            binding?.idGameRv?.isVisible = false
+            binding?.idGameButtonFinish?.isVisible = false
+            binding?.idGameTvCashWin?.isVisible = false
+            binding?.idGameIvCashWin?.isVisible = false
+            binding?.idGameCsFinish?.isVisible = true
+            binding?.idGameCsFinishTvCash?.text = "$it$"
+        }
     }
 
     //функция обновления денежного счета
     @SuppressLint("SetTextI18n")
-    override fun addCashInTextView(cashWin: Int) {
-        binding!!.idGameTvCashWin.text = "$cashWin$"
+    override fun addCashInTextView(cashWin : Int) {
+        binding?.idGameTvCashWin?.text = "$cashWin$"
     }
 
     //функция всплывающего сообщения
-    private fun showToast(message:String){
-        Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
-    }
-
+    private fun showToast(message : String) = Toast.makeText(requireContext() , message , Toast.LENGTH_SHORT).show()
 
 }
